@@ -40,19 +40,29 @@
 .inputAddress {
   display: flex;
   align-items: center;
-  gap: 10px; /* Optional: Adds space between the elements */
+  gap: 4px; /* Optional: Adds space between the elements */
+  margin: 10px;
 }
 
 button {
-  border-radius: 8px; /* Rounded edges */
-  padding: 10px 20px; /* Padding */
-  border: none; /* Remove default border */
-  background-color: #007bff; /* Background color */
-  color: white; /* Text color */
-  cursor: pointer; /* Pointer cursor on hover */
-  font-size: 16px; /* Font size */
+  border-radius: 3px;
+  padding: 5px 10px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
 }
 
 button:hover {
-  background-color: #0056b3; /* Darker background on hover */
+  background-color: #0056b3;
+}
+
+.inputAddress input {
+  height: 10px;
+  padding: 5px 7px;
+  border-radius: 2px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  margin-right: 10px;
 }

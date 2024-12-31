@@ -3,7 +3,6 @@ import Web3 from 'web3';
 import SmoothieToken from './contracts/SmoothieToken.json';
 import MyTokenSale from './contracts/MyTokenSale.json';
 import KycContract from './contracts/KycContract.json';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
@@ -11,20 +10,17 @@ function App() {
   const [accounts, setAccounts] = useState([]);
   const [tokenInstance, setTokenInstance] = useState(null);
   const [tokenSaleInstance, setTokenSaleInstance] = useState(null);
-  const [myTokenSaleAddress, setmyTokenSaleAddress] = useState(null);
   const [kycInstance, setKycInstance] = useState(null);
-  const [kycAddress, setKycAddress] = useState(""); // State variable for input value
-  const [networkId, setNetworkId] = useState(null);
-  const [tokenBalance, setTokenBalance] = useState(0); // State variable for token balance
+  const [kycAddress, setKycAddress] = useState("");
+  const [tokenBalance, setTokenBalance] = useState(0);
 
   useEffect(() => {
     const initWeb3 = async () => {
       if (window.ethereum) {
         const web3 = new Web3(window.ethereum);
-        setWeb3(web3);
         try {
           await window.ethereum.enable();
-          
+          setWeb3(web3);
           const accounts = await web3.eth.getAccounts();
           setAccounts(accounts);
           const networkId = await web3.eth.net.getId();
@@ -45,7 +41,6 @@ function App() {
             KycContract.abi,
             KycContract.networks[networkId] && KycContract.networks[networkId].address,
           );
-          setmyTokenSaleAddress(MyTokenSale.networks[networkId].address);
           setTokenInstance(tokenInstance);
           setTokenSaleInstance(tokenSaleInstance);
           setKycInstance(kycInstance);
@@ -64,11 +59,6 @@ function App() {
     alert("Account is now whitelisted");
   };
 
-  const handleBuyTokens = async () => {
-    await tokenSaleInstance.methods.buyTokens(accounts[0]).send({ from: accounts[0], value: 1 });
-    alert("Tokens bought");
-  };
-
   const handleCheckBalance = async () => {
     const balance = await tokenInstance.methods.balanceOf(accounts[0]).call();
     setTokenBalance(balance);
@@ -85,9 +75,6 @@ function App() {
           Address to allow: <input type='text' onChange={(e) => setKycAddress(e.target.value)} value={kycAddress} />
           <button onClick={handleKycWhitelisting}>Whitelist Account</button>
         </div>
-        
-        <button onClick={handleBuyTokens}>Buy Tokens</button>
-        <div>Send 1 wei to this address {myTokenSaleAddress}</div>
         <button onClick={handleCheckBalance}>Check My Token Balance</button>
         <p>Your token balance: {tokenBalance}</p>
       </header>
