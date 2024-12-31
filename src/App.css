@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+.inputAddress {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Optional: Adds space between the elements */
+}
+
+button {
+  border-radius: 8px; /* Rounded edges */
+  padding: 10px 20px; /* Padding */
+  border: none; /* Remove default border */
+  background-color: #007bff; /* Background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 16px; /* Font size */
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker background on hover */
+}

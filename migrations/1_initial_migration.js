@@ -1,4 +1,4 @@
-const MyToken = artifacts.require("../contracts/SmoothieToken");
+const MyToken = artifacts.require('SmoothieToken');
 const MyTokenSale  = artifacts.require('MyTokenSale');
 const MyKycContract = artifacts.require('KycContract')
 require("dotenv").config({path: '../.env'})
