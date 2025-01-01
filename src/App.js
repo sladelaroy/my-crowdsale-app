@@ -56,13 +56,18 @@ function App() {
 
   const handleKycWhitelisting = async () => {
     await kycInstance.methods.setKycCompleted(kycAddress).send({ from: accounts[0] });
-    alert("Account is now whitelisted");
+    alert(`${kycAddress} is now whitelisted`);
   };
 
   const handleCheckBalance = async () => {
     const balance = await tokenInstance.methods.balanceOf(accounts[0]).call();
     setTokenBalance(balance);
     alert(`Your token balance is ${balance}`);
+  };
+
+  const handleBuyTokens = async () => {
+    await tokenSaleInstance.methods.buyTokens(accounts[0]).send({ from: accounts[0], value: web3.utils.toWei("1", "wei") });
+    alert("Bought 1 Smoothie Token");
   };
 
   return (
@@ -75,7 +80,8 @@ function App() {
           Address to allow: <input type='text' onChange={(e) => setKycAddress(e.target.value)} value={kycAddress} />
           <button onClick={handleKycWhitelisting}>Whitelist Account</button>
         </div>
-        <button onClick={handleCheckBalance}>Check My Token Balance</button>
+        <button className="checkBalanceButton" onClick={handleCheckBalance}>Check My Token Balance</button>
+        <button className="buyTokensButton" onClick={handleBuyTokens}>Buy Tokens</button>
         <p>Your token balance: {tokenBalance}</p>
       </header>
     </div>
